@@ -8,7 +8,7 @@ $mysql_pass = "opsweekly";
 
 // The domain name your company uses to send email from, used for a reply-to address
 // for weekly reports
-$email_from_domain = "mycompany.com";
+$email_from_domain = "todaytix.com";
 
 /**
  * Authentication configuration
@@ -26,7 +26,7 @@ function getUsername() {
 
 /**
  * Team configuration
- * Arrays of teams, the key being the Virtual Host FQDN, e.g. opsweekly.mycompany.com
+ * Arrays of teams, the key being the Virtual Host FQDN, e.g. opsweekly.todaytix.com
  *
  * Options:
  * display_name: Used for display purposes, your nice team name.
@@ -46,10 +46,10 @@ function getUsername() {
  *          e.g. Match this to Pagerduty if you use that for scheduling.
  **/
 $teams = array(
-    "opsweekly.mycompany.com" => array(
+    "opsweekly.todaytix.com" => array(
         "root_url" => ".",
         "display_name" => "Ops",
-        "email_report_to" => "ops@mycompany.com",
+        "email_report_to" => "ops@todaytix.com",
         "database" => "opsweekly",
         "event_versioning" => "off",
         "oncall" => array(
@@ -65,16 +65,16 @@ $teams = array(
         "weekly_hints" => array("jira", "github", "bitbucket"),
         "irc_channel" => "#ops"
     ),
-    "anotherweekly.mycompany.com" => array(
+    "anotherweekly.todaytix.com" => array(
         "display_name" => "Team2",
-        "email_report_to" => "team2@mycompany.com",
+        "email_report_to" => "team2@todaytix.com",
         "database" => "team2weekly",
         "weekly_hints" => array("jira", "github"),
         "oncall" => false
     ),
-    "thirdweekly.mycompany.com" => array(
+    "thirdweekly.todaytix.com" => array(
         "display_name" => "Third",
-        "email_report_to" => "third@mycompany.com",
+        "email_report_to" => "third@todaytix.com",
         "database" => "thirdweekly",
         "weekly_hints" => array("jira", "github"),
         "oncall" => array(
@@ -90,9 +90,9 @@ $teams = array(
             "end" => "monday 12:00",
         ),
     ),
-    "forthweekly.mycompany.com" => array(
+    "forthweekly.todaytix.com" => array(
         "display_name" => "Forth",
-        "email_report_to" => "forth@mycompany.com",
+        "email_report_to" => "forth@todaytix.com",
         "database" => "forthweekly",
         "weekly_hints" => array("jira", "github"),
         "oncall" => array(
@@ -135,22 +135,10 @@ $weekly_providers = array(
         "lib" => "providers/weekly/jira.php",
         "class"=> "JIRAHints",
         "options" => array(
-            "jira_api_url" => "https://mycompany.atlassian.net/rest/api/latest",
-            "jira_url" => "https://mycompany.atlassian.net",
+            "jira_api_url" => "https://todaytix.atlassian.net/rest/api/latest",
+            "jira_url" => "https://todaytix.atlassian.net",
             "username" => "jira_api_login",
             "password" => "jira_api_password",
-        ),
-    ),
-    "bitbucket" => array(
-        "display_name" => "Bitbucket Activity",
-        "lib" => "providers/weekly/bitbucket.php",
-        "class" => "BitbucketHints",
-        "options" => array(
-            "bitbucket_api_url" => "https://api.bitbucket.org/2.0",
-            "bitbucket_team" => "yourteam",
-            "bitbucket_user" => "bitbucket_user",
-            /* "bitbucket_password" => "bitbucket_password", /* Enable this only if you want to use basic authentication */
-            "bitbucket_app_password" => "bitbucket_app_password",
         ),
     ),
     "example" => array(
@@ -173,7 +161,7 @@ $oncall_providers = array(
         "display_name" => "Splunk",
         "lib" => "providers/oncall/splunk.php",
         "options" => array(
-            "base_url" => "https://splunk.mycompany.com:8089",
+            "base_url" => "https://splunk.todaytix.com:8089",
             "username" => "splunkapiusername",
             "password" => "splunkapipassword",
         ),
@@ -193,10 +181,10 @@ $oncall_providers = array(
         "display_name" => "Pagerduty",
         "lib" => "providers/oncall/pagerduty.php",
         "options" => array(
-            "base_url" => "https://mycompany.pagerduty.com/api/v1",
+            "base_url" => "https://todaytix.pagerduty.com/api/v1",
             // Supports two auth methods. Username/password or apikey.
             // If you define apikey, then the username/password will be ignored
-            "username" => "mylogin@mycompany.com",
+            "username" => "mylogin@todaytix.com",
             "password" => "password",
             // uncomment and define if you use apikeys
             // "apikey" => "XXXXXX",
@@ -239,7 +227,7 @@ $sleep_providers = array(
             )
         ),
         "lib" => "providers/sleep/SleepUP.php",
-        "graphite_host" => "http://graphite.mycompany.com"
+        "graphite_host" => "http://graphite.todaytix.com"
     ),
     "fitbit" => array(
         "display_name" => "fitbit",
@@ -253,7 +241,7 @@ $sleep_providers = array(
                 "placeholder" => "ops.dschauenberg.sleep")
             ),
         "lib" => "providers/sleep/SleepFitbit.php",
-        "graphite_host" => "http://graphite.mycompany.com")
+        "graphite_host" => "http://graphite.todaytix.com")
 );
 
 // The number of search results per page
@@ -265,9 +253,9 @@ $error_log_file = "/var/log/apache2/opsweekly.debug.log";
 // Dev FQDN
 // An alternative FQDN that will be accepted by Opsweekly for running a development copy elsewhere
 // Fed into preg_replace so regexes are allowed
-$dev_fqdn = "/(\w+).vms.mycompany.com/";
+$dev_fqdn = "/(\w+).vms.todaytix.com/";
 // The prod FQDN is then subsituted in place of the above string.
-$prod_fqdn = "mycompany.com";
+$prod_fqdn = "todaytix.com";
 
 // Global configuration for irccat, used to send messages to IRC about weekly meetings.
 $irccat_hostname = '';
